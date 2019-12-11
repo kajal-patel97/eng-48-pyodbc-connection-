@@ -40,7 +40,15 @@ class NWProducts(MSDBConnection):
 
 
 #Method to prints the top 10 products by price - formatted
-
+    def top_10_by_price(self):
+        query = "SELECT TOP 10 * FROM Products ORDER BY UnitPrice DESC"
+        result = self.__sql_query(query)
+        while True:
+            record = result.fetchone()
+            if record is None:
+                break
+            print(f"Name: {record.ProductName} - £{record.UnitPrice}")
+        return 'All Done'
 #Method to prints the bottom 10 products by price - formatted
 
 # Search product by name
@@ -52,8 +60,12 @@ class NWProducts(MSDBConnection):
 
 
 
-# table_products = NWProducts()
-#
+table_products = NWProducts()
+
+#prints the top 10 products by price
+products = table_products.top_10_by_price()
+print(products)
+
 # #Getting all products
 # products = table_products.read_all()
 # print(products.fetchone())
