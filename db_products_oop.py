@@ -3,17 +3,12 @@ from connect_oop import *
 
 class NWProducts(MSDBConnection):
 
-    def __sql_query(self, sql_query): #the encapsulation makes the method private - can only be called using other methods
-        return self.cursor.execute(sql_query)
-
     # Method to list or read all
     def read_all(self):
         #Build the sql query
         query = "SELECT * FROM Products"
-
         #execute the query
-        data = self.__sql_query(query)
-
+        data = self._MSDBConnection__sql_query(query)
         #return an iterable object
         return data
 
@@ -25,13 +20,13 @@ class NWProducts(MSDBConnection):
 
     def read_one(self,id):
         query = f"SELECT * FROM Products WHERE ProductID = {id}"
-        result = self.__sql_query(query)
+        result = self._MSDBConnection__sql_query(query)
         return result.fetchone()
 
 # PRINT ALL PRODUCTS USIGN THE WHILE LOOP AND FETCHONE()
     def print_all(self):
         query = "SELECT * FROM Products"
-        data = self.__sql_query(query)
+        data = self._MSDBConnection__sql_query(query)
         while True:
             record = data.fetchone()
             if record is None:
@@ -42,7 +37,7 @@ class NWProducts(MSDBConnection):
 #Method to prints the top 10 products by price - formatted
     def top_10_by_price(self):
         query = "SELECT TOP 10 * FROM Products ORDER BY UnitPrice DESC"
-        result = self.__sql_query(query)
+        result = self._MSDBConnection__sql_query(query)
         while True:
             record = result.fetchone()
             if record is None:
@@ -52,14 +47,26 @@ class NWProducts(MSDBConnection):
 #Method to prints the bottom 10 products by price - formatted
     def bottom_10_by_price(self):
         query = "SELECT TOP 10 * FROM Products ORDER BY UnitPrice ASC"
-        result = self.__sql_query(query)
+        result = self._MSDBConnection__sql_query(query)
         while True:
             record = result.fetchone()
             if record is None:
                 break
             print(f"Name: {record.ProductName} - £{record.UnitPrice}")
         return 'All Done'
+
 # Search product by name
+    def search_product_name(self):
+        ask_name = input('What is the name you want to search for?  ')
+        query = f"SELECT * FROM Products WHERE ProductName LIKE '%{ask_name}%' "
+        result = self._MSDBConnection__sql_query(query)
+        while True:
+            record = result.fetchone()
+            if record is None:
+                break
+            print(f"Name: {record.ProductName} - £{record.UnitPrice}")
+        return 'All done!'
+
 
 
 
@@ -70,13 +77,18 @@ class NWProducts(MSDBConnection):
 
 table_products = NWProducts()
 
+#Search product name
+products = table_products.search_product_name()
+print(products)
+
+
 # #prints the top 10 products by price
 # products = table_products.top_10_by_price()
 # print(products)
 
-#prints the bottom 10 products by price
-products = table_products.bottom_10_by_price()
-print(products)
+# #prints the bottom 10 products by price
+# products = table_products.bottom_10_by_price()
+# print(products)
 
 # #Getting all products
 # products = table_products.read_all()
