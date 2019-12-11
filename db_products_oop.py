@@ -39,7 +39,11 @@ class NWProducts(MSDBConnection):
             print(f"ID:{record.ProductID} - {record.ProductName} £{record.UnitPrice}")
 
 
+#Method to prints the top 10 products by price - formatted
 
+#Method to prints the bottom 10 products by price - formatted
+
+# Search product by name
 
 
 
