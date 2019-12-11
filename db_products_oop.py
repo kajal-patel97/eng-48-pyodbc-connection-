@@ -36,7 +36,17 @@ class NWProducts(MSDBConnection):
             record = data.fetchone()
             if record is None:
                 break
-            print(record)
+            print(f"ID:{record.ProductID} - {record.ProductName} £{record.UnitPrice}")
+
+
+
+
+
+
+
+
+
+
 
 # table_products = NWProducts()
 #
