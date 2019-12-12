@@ -37,13 +37,35 @@ class NWEmployee(MSDBConnection):
             print(f'Employee ID: {record.EmployeeID}. Name: {record.TitleOfCourtesy} {record.FirstName} {record.LastName}. Title: {record.Title}')
         return 'Completed'
 
+#Create one Employee
+    def create_employee(self):
+        print('I just need some information for you to create an employee...')
+        first_name = input('Please enter their first name...')
+        last_name = input('Please enter their last name...')
+        query = f"INSERT INTO Employees(EmployeeID, FirstName, LastName) VALUES('{first_name}','{last_name}' "
+        result = self.__sql_query(query)
+        self.docker_Northwind.commit()
+        return result
+        # while True:
+        #     if result is None:
+        #         break
+        #     print(f"You have added Name: {first_name} {last_name}. Their ID is: {id}.")
 
 
+# # get the last record to increment from the last ID
+# get the id
+# increment id
+# use incremented id
 
+#update/ change one employee data
 
 #add all these to the run_products
 
 table_employees = NWEmployee()
+
+# #Create an employee
+# added_employee = table_employees.create_employee()
+# added_employee
 
 # #Search for employee
 # employee = table_employees.search_employee()

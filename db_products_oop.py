@@ -68,8 +68,11 @@ class NWProducts(MSDBConnection):
         return 'All done!'
 
 
-
-
+# average price
+#max price
+# min price
+# products in a price range
+# create one product
 
 
 
@@ -77,9 +80,9 @@ class NWProducts(MSDBConnection):
 
 table_products = NWProducts()
 
-#Search product name
-products = table_products.search_product_name()
-print(products)
+# #Search product name
+# products = table_products.search_product_name()
+# print(products)
 
 
 # #prints the top 10 products by price
