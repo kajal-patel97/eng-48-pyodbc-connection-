@@ -12,6 +12,8 @@ while True:
     print('choose 3 for top 10 products by price')
     print('choose 4 for bottom 10 products by price')
     print('choose 5 to search for product by name ')
+    print('choose 6 to search for an employee')
+    print('choose 7 to create an employee')
     print('_________________________________________')
 
     user_input = input('chose a number listed in the options').strip()
@@ -40,6 +42,17 @@ while True:
         print('Search for a product by name ')
         search = products_table.search_product_name()
         print(search)
+
+    elif user_input == '6':
+        print('Search for an employee')
+        search = employees_table.search_employee()
+        print(search)
+
+    elif user_input == '7':
+        print('I just need some information for you to create an employee...')
+        first_name = input('Please enter their first name...')
+        last_name = input('Please enter their last name...')
+        employees_table.create_employee(first_name,last_name)
 
 
 

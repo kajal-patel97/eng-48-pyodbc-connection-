@@ -3,9 +3,6 @@ from connect_oop import *
 
 class NWEmployee(MSDBConnection):
 
-    def __sql_query(self, sql_query): #the encapsulation makes the method private - can only be called using other methods
-        return self.cursor.execute(sql_query)
-
 
 # method to get all employee data
     def get_all_employee(self):
@@ -38,20 +35,11 @@ class NWEmployee(MSDBConnection):
         return 'Completed'
 
 #Create one Employee
-    def create_employee(self):
-        print('I just need some information for you to create an employee...')
-        first_name = input('Please enter their first name...')
-        last_name = input('Please enter their last name...')
+    def create_employee(self, first_name, last_name):
         query = f"INSERT INTO Employees(EmployeeID, FirstName, LastName) VALUES('{first_name}','{last_name}' "
-        result = self.__sql_query(query)
-        self.docker_Northwind.commit()
-        return result
-        # while True:
-        #     if result is None:
-        #         break
-        #     print(f"You have added Name: {first_name} {last_name}. Their ID is: {id}.")
-
-
+        result = self._MSDBConnection__sql_query(query)
+        insert = self.docker_Northwind.commit(result)
+        return insert
 # # get the last record to increment from the last ID
 # get the id
 # increment id

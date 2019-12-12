@@ -69,6 +69,11 @@ class NWProducts(MSDBConnection):
 
 
 # average price
+
+
+
+
+
 #max price
 # min price
 # products in a price range
