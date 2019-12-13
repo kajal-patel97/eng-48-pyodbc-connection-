@@ -34,12 +34,15 @@ class NWEmployee(MSDBConnection):
             print(f'Employee ID: {record.EmployeeID}. Name: {record.TitleOfCourtesy} {record.FirstName} {record.LastName}. Title: {record.Title}')
         return 'Completed'
 
+    def __sql_query(self, sql_query): #the encapsulation makes the method private - can only be called using other methods
+        return self.cursor.execute(sql_query)
+
 #Create one Employee
     def create_employee(self, first_name, last_name):
-        query = f"INSERT INTO Employees(EmployeeID, FirstName, LastName) VALUES('{first_name}','{last_name}' "
-        result = self._MSDBConnection__sql_query(query)
-        insert = self.docker_Northwind.commit(result)
-        return insert
+        query = f"INSERT INTO Employees (FirstName, LastName) VALUES ('{first_name}','{last_name}') "
+        result = self.__sql_query(query)
+        self.docker_Northwind.commit()
+        return result
 # # get the last record to increment from the last ID
 # get the id
 # increment id

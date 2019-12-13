@@ -53,6 +53,7 @@ while True:
         first_name = input('Please enter their first name...')
         last_name = input('Please enter their last name...')
         employees_table.create_employee(first_name,last_name)
+        print('Insert Complete')
 
 
 
